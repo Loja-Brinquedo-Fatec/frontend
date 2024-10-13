@@ -28,40 +28,36 @@
     </div>
   </template>
   
-  <script>
-  import { useBrinquedosStore } from '../stores/brinquedos';
-  import { onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  export default {
-    name: 'Admin',
-    setup() {
-      const brinquedosStore = useBrinquedosStore();
-      const router = useRouter();
-  
-      onMounted(() => {
-        brinquedosStore.carregarBrinquedos();
-      });
-  
-      const editarBrinquedo = (id) => {
-        router.push(`/admin/editar/${id}`);
-      };
-  
-      const excluirBrinquedo = (id) => {
-        if (confirm('Tem certeza que deseja excluir este brinquedo?')) {
-          brinquedosStore.excluirBrinquedo(id);
-          alert('Brinquedo excluído!');
-        }
-      };
-  
-      return {
-        brinquedos: brinquedosStore.brinquedos,
-        editarBrinquedo,
-        excluirBrinquedo,
-      };
-    },
-  };
-  </script>
+  <script lang="ts">
+import { defineComponent } from 'vue';
+import { useBrinquedosStore } from '../stores/brinquedos';
+import { useRouter } from 'vue-router';
+
+export default defineComponent({
+  name: 'Admin',
+  setup() {
+    const brinquedosStore = useBrinquedosStore();
+    const router = useRouter();
+
+    const editarBrinquedo = (id: number): void => {
+      router.push(`/admin/editar/${id}`);
+    };
+
+    const excluirBrinquedo = (id: number): void => {
+      if (confirm('Tem certeza que deseja excluir este brinquedo?')) {
+        brinquedosStore.excluirBrinquedo(id);
+        alert('Brinquedo excluído!');
+      }
+    };
+
+    return {
+      brinquedos: brinquedosStore.brinquedos,
+      editarBrinquedo,
+      excluirBrinquedo,
+    };
+  },
+});
+</script>
   
   <style scoped>
   .container {
