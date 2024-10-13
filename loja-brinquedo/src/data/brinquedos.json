@@ -1,0 +1,25 @@
+[
+    {
+      "id": 1,
+      "nome": "Carrinho de Corrida",
+      "preco": 99.99,
+      "descricao": "Um carrinho de corrida rápido e colorido.",
+      "categoria": "Veículos",
+      "marca": "Hot Wheels",
+      "imagem": "https://example.com/carrinho.jpg",
+      "quantidade": 10,
+      "detalhes": "Ideal para crianças de 3 anos ou mais."
+    },
+    {
+      "id": 2,
+      "nome": "Boneca de Porcelana",
+      "preco": 59.99,
+      "descricao": "Boneca clássica de porcelana com roupas intercambiáveis.",
+      "categoria": "Bonecas",
+      "marca": "Barbie",
+      "imagem": "https://example.com/boneca.jpg",
+      "quantidade": 5,
+      "detalhes": "Perfeita para colecionadores."
+    }
+  ]
+  
