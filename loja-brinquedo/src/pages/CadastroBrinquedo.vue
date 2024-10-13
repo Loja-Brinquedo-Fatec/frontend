@@ -84,7 +84,6 @@ export default defineComponent({
     });
 
     const handleSubmit = () => {
-      // Validar os dados antes de adicionar
       if (form.nome && form.preco && form.quantidade) {
         brinquedosStore.adicionarBrinquedo({ ...form });
         alert('Brinquedo cadastrado com sucesso!');
