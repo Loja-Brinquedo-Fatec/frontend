@@ -29,11 +29,12 @@
         placeholder="Marca"
         required
       />
+      <!-- Alteração: campo de upload de arquivo -->
       <input
-        type="url"
+        type="file"
         name="imagem"
-        v-model="form.imagem"
-        placeholder="URL da Imagem"
+        @change="handleImageChange"
+        accept="image/*"
         required
       />
       <input
@@ -72,20 +73,44 @@ export default defineComponent({
   setup() {
     const brinquedosStore = useBrinquedosStore();
     const router = useRouter();
+    
+    // Estado reativo para armazenar os dados do formulário, incluindo a imagem
     const form = reactive<Omit<Brinquedo, 'id'>>({
       nome: '',
       descricao: '',
       categoria: '',
       marca: '',
-      imagem: '',
+      imagem: '', // Isso agora armazenará o nome ou URL da imagem
       preco: 0,
       detalhes: '',
       quantidade: 0,
     });
 
+    let imagemSelecionada: File | null = null; // Variável para armazenar o arquivo selecionado
+
+    // Manipulador de mudança de arquivo (para capturar a imagem selecionada)
+    const handleImageChange = (event: Event) => {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        imagemSelecionada = input.files[0]; // Armazena o arquivo selecionado
+        form.imagem = URL.createObjectURL(imagemSelecionada); // Opcional: exibe a imagem localmente
+      }
+    };
+
     const handleSubmit = () => {
-      if (form.nome && form.preco && form.quantidade) {
-        brinquedosStore.adicionarBrinquedo({ ...form });
+      if (form.nome && form.preco && form.quantidade && imagemSelecionada) {
+        // Aqui você pode enviar a imagem selecionada junto com os outros dados
+        const formData = new FormData();
+        formData.append('nome', form.nome);
+        formData.append('descricao', form.descricao);
+        formData.append('categoria', form.categoria);
+        formData.append('marca', form.marca);
+        formData.append('imagem', imagemSelecionada); // Adiciona o arquivo de imagem
+        formData.append('preco', form.preco.toString());
+        formData.append('quantidade', form.quantidade.toString());
+        formData.append('detalhes', form.detalhes);
+
+        brinquedosStore.adicionarBrinquedo({ ...form }); // Simula a adição de brinquedo
         alert('Brinquedo cadastrado com sucesso!');
         router.push('/admin');
       } else {
@@ -93,7 +118,7 @@ export default defineComponent({
       }
     };
 
-    return { form, handleSubmit };
+    return { form, handleImageChange, handleSubmit };
   },
 });
 </script>

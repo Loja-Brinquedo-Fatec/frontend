@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <h2>Todos os Brinquedos</h2>
+    <!-- <div class="Banner">
+      <div class="letreco">
+        <h2>Com a Toy Store a imaginação voa alto!</h2>
+      </div>
+      <img src="../assets/banner.png" alt="">
+    </div> -->
+    <h2>Brinquedos em Destaque</h2>
     <div class="grid">
       <div v-for="brinquedo in brinquedos" :key="brinquedo.id" class="card">
         <img :src="brinquedo.imagem" :alt="brinquedo.nome" class="image" />
@@ -52,5 +58,17 @@ export default defineComponent({
   width: 100%;
   height: 150px;
   object-fit: cover;
+}
+.Banner{
+  display: flex;
+  height: 40dvh;
+  max-width: 100%;
+}
+.Banner img{
+  max-width: 100%;
+  margin: 0;
+}
+.letreco{
+  position: absolute;
 }
 </style>

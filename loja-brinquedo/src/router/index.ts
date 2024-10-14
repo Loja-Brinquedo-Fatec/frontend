@@ -4,6 +4,7 @@ import Catalogo from '../pages/Catalogo.vue';
 import DetalhesBrinquedo from '../pages/DetalhesBrinquedo.vue';
 import Admin from '../pages/Admin.vue';
 import CadastroBrinquedo from '../pages/CadastroBrinquedo.vue';
+import EditarBrinquedo from '../pages/EditarBrinquedo.vue';
 import SobreEquipe from '../pages/SobreEquipe.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -32,6 +33,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/cadastrar',
     name: 'CadastroBrinquedo',
     component: CadastroBrinquedo,
+  },
+  {
+    path: '/admin/editar/:id',
+    name: 'EditarBrinquedo',
+    component: EditarBrinquedo,
+    props: true,
   },
   {
     path: '/sobre',
