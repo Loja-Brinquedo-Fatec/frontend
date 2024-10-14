@@ -1,6 +1,6 @@
 <template>
   <header :class="headerClass" class="header">
-    <h1>Loja de Brinquedos</h1>
+    <h1>Toy Story</h1>
     <nav>
       <router-link to="/" class="link" @click="setActiveLink('home')">Home</router-link>
       <router-link to="/catalogo" class="link" @click="setActiveLink('catalogo')">Catálogo</router-link>
@@ -50,7 +50,7 @@ export default defineComponent({
   background-color: #ffcc00;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   transition: background-color 0.3s ease;
   /* Animação suave */

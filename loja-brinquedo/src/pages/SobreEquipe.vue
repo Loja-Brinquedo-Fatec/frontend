@@ -32,14 +32,14 @@
             foto: fotoCamille,
           },
           {
-            nome: 'Maria Oliveira',
+            nome: 'Isaias B. Souza',
             codigo: '2571392322003',
             linkedin: 'https://www.linkedin.com/in/isaias-souza-819295227/',
             github: 'https://github.com/IsaiasSorriso',
             foto: fotoIsaias,
           },
           {
-            nome: 'Maria Oliveira',
+            nome: 'Victor Daniel',
             codigo: '2571392322038',
             linkedin: 'https://www.linkedin.com/in/victor-daniel-b0a5a4214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
             github: 'https://github.com/vdanviel',
