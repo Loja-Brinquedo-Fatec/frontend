@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h2>Cadastrar Novo Brinquedo</h2>
+  
     <form @submit.prevent="handleSubmit" class="form">
       <input
         type="text"
@@ -37,6 +38,7 @@
         accept="image/*"
         required
       />
+      <label for="">Preço</label>
       <input
         type="number"
         step="0.01"
@@ -45,6 +47,7 @@
         placeholder="Preço"
         required
       />
+      <label for="">Quantidade</label>
       <input
         type="number"
         name="quantidade"
@@ -58,7 +61,7 @@
         placeholder="Detalhes"
         required
       ></textarea>
-      <button type="submit" class="button">Salvar</button>
+      <button type="submit" class="btn btn-success">Salvar</button>
     </form>
   </div>
 </template>
@@ -128,23 +131,84 @@ export default defineComponent({
   padding: 20px;
 }
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 input,
 textarea {
-  padding: 8px;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-.button {
-  padding: 10px;
-  background-color: #4caf50;
+
+/* Cor do texto do placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.label{
+  width: 100%;
+  text-align: left;
+}
+
+/* Estilo de foco (quando o input é clicado) */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Estilo do botão de upload de arquivo */
+input[type="file"] {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+/* Estilo especial para o botão de upload (estilizado para parecer um botão) */
+input[type="file"]::file-selector-button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para o botão submit */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838;
 }
 </style>

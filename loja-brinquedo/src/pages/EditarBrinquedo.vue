@@ -2,50 +2,65 @@
   <div class="edit-item">
     <h1>Editar Produto</h1>
     <form @submit.prevent="updateProduct">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" v-model="product.nome" required />
-      </div>
-
-      <div class="form-group">
-        <label for="preco">Preço:</label>
-        <input type="number" id="preco" v-model="product.preco" required />
-      </div>
-
-      <div class="form-group">
-        <label for="descricao">Descrição:</label>
-        <textarea id="descricao" v-model="product.descricao" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="categoria">Categoria:</label>
-        <input type="text" id="categoria" v-model="product.categoria" required />
-      </div>
-
-      <div class="form-group">
-        <label for="marca">Marca:</label>
-        <input type="text" id="marca" v-model="product.marca" required />
-      </div>
-
-      <div class="form-group">
-        <label for="imagem">Imagem do Produto:</label>
-        <!-- Alteração: campo de upload de arquivo -->
-        <input type="file" id="imagem" @change="handleImageChange" accept="image/*" />
-        <!-- Exibir a imagem selecionada (opcional) -->
-        <img v-if="product.imagem" :src="product.imagem" alt="Pré-visualização da imagem" class="image-preview"/>
-      </div>
-
-      <div class="form-group">
-        <label for="quantidade">Quantidade:</label>
-        <input type="number" id="quantidade" v-model="product.quantidade" required />
-      </div>
-
-      <div class="form-group">
-        <label for="detalhes">Detalhes:</label>
-        <textarea id="detalhes" v-model="product.detalhes" required></textarea>
-      </div>
-
-      <button type="submit">Atualizar Produto</button>
+      <input
+        type="text"
+        name="nome"
+        v-model="product.nome"
+        placeholder="Nome"
+        required
+      />
+      <textarea
+        name="descricao"
+        v-model="product.descricao"
+        placeholder="Descrição"
+        required
+      ></textarea>
+      <input
+        type="text"
+        name="categoria"
+        v-model="product.categoria"
+        placeholder="Categoria"
+        required
+      />
+      <input
+        type="text"
+        name="marca"
+        v-model="product.marca"
+        placeholder="Marca"
+        required
+      />
+      <!-- Alteração: campo de upload de arquivo -->
+      <input
+        type="file"
+        name="imagem"
+        @change="handleImageChange"
+        accept="image/*"
+        required
+      />
+      <label for="">Preço</label>
+      <input
+        type="number"
+        step="0.01"
+        name="preco"
+        v-model.number="product.preco"
+        placeholder="Preço"
+        required
+      />
+      <label for="">Quantidade</label>
+      <input
+        type="number"
+        name="quantidade"
+        v-model.number="product.quantidade"
+        placeholder="Quantidade"
+        required
+      />
+      <textarea
+        name="detalhes"
+        v-model="product.detalhes"
+        placeholder="Detalhes"
+        required
+      ></textarea>
+      <button type="submit" class="btn btn-success">Salvar</button>
     </form>
   </div>
 </template>
@@ -143,27 +158,85 @@ export default defineComponent({
   margin: auto;
 }
 
-.form-group {
-  margin-bottom: 1em;
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-label {
-  display: block;
-  margin-bottom: 0.5em;
-}
-
 input,
 textarea {
   width: 100%;
-  padding: 0.5em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.image-preview {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  margin-top: 10px;
+/* Cor do texto do placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.label{
+  width: 100%;
+  text-align: left;
+}
+
+/* Estilo de foco (quando o input é clicado) */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Estilo do botão de upload de arquivo */
+input[type="file"] {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+/* Estilo especial para o botão de upload (estilizado para parecer um botão) */
+input[type="file"]::file-selector-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para o botão submit */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838;
 }
 </style>

@@ -1,84 +1,88 @@
 <template>
   <header :class="headerClass" class="header">
-    <h1>Toy Story</h1>
+    <img src="../assets/logoToyStory.png" alt="" class="logo">
     <nav>
-      <router-link to="/" class="link" @click="setActiveLink('home')">Home</router-link>
-      <router-link to="/catalogo" class="link" @click="setActiveLink('catalogo')">Catálogo</router-link>
-      <router-link to="/admin" class="link" @click="setActiveLink('admin')">Admin</router-link>
-      <router-link to="/sobre" class="link" @click="setActiveLink('sobre')">Sobre a Equipe</router-link>
+      <router-link 
+        to="/" 
+        class="link" 
+        :class="{ active: activeLink === 'home' }" 
+        @click="setActiveLink('home')"
+      >Home</router-link>
+
+      <router-link 
+        to="/catalogo" 
+        class="link" 
+        :class="{ active: activeLink === 'catalogo' }" 
+        @click="setActiveLink('catalogo')"
+      >Catálogo</router-link>
+
+      <router-link 
+        to="/admin" 
+        class="link" 
+        :class="{ active: activeLink === 'admin' }" 
+        @click="setActiveLink('admin')"
+      >Admin</router-link>
+
+      <router-link 
+        to="/sobre" 
+        class="link" 
+        :class="{ active: activeLink === 'sobre' }" 
+        @click="setActiveLink('sobre')"
+      >Sobre a Equipe</router-link>
     </nav>
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed  } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const activeLink = ref('home'); // Estado para controlar o link ativo
-
-    const setActiveLink = (link: string) => {
-      activeLink.value = link; // Atualiza o link ativo
-    };
-
-    // Computa a classe do header com base no link ativo
-    const headerClass = computed(() => {
-      switch (activeLink.value) {
-        case 'home':
-          return 'header home-bg';
-        case 'catalogo':
-          return 'header catalogo-bg';
-        case 'admin':
-          return 'header admin-bg';
-        case 'sobre':
-          return 'header sobre-bg';
-        default:
-          return 'header';
-      }
-    });
-
+<script>
+export default {
+  data() {
     return {
-      setActiveLink,
-      headerClass,
+      activeLink: 'home', // Define o link inicial como 'home'
     };
   },
-});
+  methods: {
+    setActiveLink(link) {
+      this.activeLink = link; // Atualiza o link ativo
+    },
+  },
+};
 </script>
 
 <style scoped>
 .header {
-  background-color: #ffcc00;
   padding: 10px;
+  background-color: #ffffff;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  transition: background-color 0.3s ease;
-  /* Animação suave */
+  justify-content: space-around;
 }
 
-.home-bg{
-  background-color: #f8d7da;
-  /* Cor de fundo para a Home */
+.logo{
+  width: 20%;
 }
 
-.catalogo-bg {
-  background-color: #d1ecf1;
-  /* Cor de fundo para o Catálogo */
-}
-
-.admin-bg {
-  background-color: #d4edda;
-  /* Cor de fundo para Admin */
-}
-
-.sobre-bg {
-  background-color: #fff3cd;
-  /* Cor de fundo para Sobre a Equipe */
+nav {
+  /* margin-top: 20px; */
 }
 
 .link {
   margin: 0 10px;
   text-decoration: none;
   color: #333;
+  padding: 5px;
+  border-radius: 4px;
+  transition: border 0.3s ease, color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.link:hover {
+  color: #ff8f7d;
+}
+
+.active {
+  border-bottom: 2px solid #ff8f7d; /* A borda de cor para o link ativo */
+  border-top: 2px solid #ff8f7d; /* A borda de cor para o link ativo */
+  color: #ff8f7d; /* Cor do texto para o link ativo */
+  margin: 0;
 }
 </style>

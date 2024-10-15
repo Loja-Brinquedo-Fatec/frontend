@@ -23,7 +23,7 @@
         </tbody>
       </table>
       <router-link to="/admin/cadastrar">
-        <button class="button-add">+</button>
+        <button class="btn btn-success">Cadastrar Novo Brinquedo</button>
       </router-link>
     </div>
   </template>

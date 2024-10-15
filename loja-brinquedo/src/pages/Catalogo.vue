@@ -16,12 +16,17 @@
       </select>
     </div>
     <div class="grid">
-      <div v-for="brinquedo in brinquedosFiltrados" :key="brinquedo.id" class="card">
+      <div v-for="brinquedo in brinquedosFiltrados" :key="brinquedo.id" class="card" style="width: 18rem;">
         <img :src="brinquedo.imagem" :alt="brinquedo.nome" class="image" />
-        <h3>{{ brinquedo.nome }}</h3>
-        <p>Preço: R$ {{ brinquedo.preco.toFixed(2) }}</p>
-        <p>{{ brinquedo.descricao }}</p>
-        <router-link :to="`/detalhes/${brinquedo.id}`">Ver Detalhes</router-link>
+        <div class="card-body">
+          <h5 class="card-title">{{ brinquedo.nome }}</h5>
+          <p class="card-text">{{ brinquedo.descricao }}</p>
+          <p>R$ {{ brinquedo.preco.toFixed(2) }}</p>
+        </div>
+        <div class="card-body">
+          <router-link :to="`/detalhes/${brinquedo.id}`" class="link"> <button class="btn btn-success">Ver
+              Detalhes</button> </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -63,35 +68,45 @@ export default defineComponent({
 
 <style scoped>
 .container {
-  padding: 20px;
+  width: 100%;
 }
 .filtros {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
 }
 .input {
   flex: 1;
   padding: 8px;
+  width: 10px;
 }
 .select {
   padding: 8px;
 }
 .grid {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  margin: 20px;
+  margin-bottom: 20dvh;
 }
+
 .card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  width: 200px;
-  text-align: center;
+ padding: 10px;
 }
-.image {
+
+.image{
   width: 100%;
-  height: 150px;
+  height: auto;
+  max-height: 200px;
   object-fit: cover;
+  border-radius: 8px;
+}
+
+p{
+  text-align: left;
 }
 </style>
