@@ -76,13 +76,13 @@ nav {
 }
 
 .link:hover {
-  color: #ff8f7d;
+  color: #2ba0ff;
 }
 
 .active {
-  border-bottom: 2px solid #ff8f7d; /* A borda de cor para o link ativo */
-  border-top: 2px solid #ff8f7d; /* A borda de cor para o link ativo */
-  color: #ff8f7d; /* Cor do texto para o link ativo */
+  border-bottom: 2px solid #2ba0ff; /* A borda de cor para o link ativo */
+  border-top: 2px solid #2ba0ff; /* A borda de cor para o link ativo */
+  color: #2ba0ff; /* Cor do texto para o link ativo */
   margin: 0;
 }
 </style>
