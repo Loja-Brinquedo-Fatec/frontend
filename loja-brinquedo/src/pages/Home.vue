@@ -26,7 +26,7 @@
           <span class="text-title">R$ {{ brinquedo.preco.toFixed(2) }}</span>
           <div class="card-button">
             <router-link :to="`/detalhes/${brinquedo.id}`" class="link">
-             <button class="btn">Comprar</button>
+             <button class="btn"><img src="../assets/icons8-carrinho-24.png" alt="">Comprar</button>
             </router-link>
           </div>
         </div>
@@ -127,9 +127,9 @@ svg {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2; /* Limite de 2 linhas */
-  line-height: 1.5em; /* Altura da linha */
-  max-height: 3em; /* Altura máxima do elemento = 2 * line-height */
+  -webkit-line-clamp: 2;
+  line-height: 1.5em; 
+  max-height: 3em; 
   text-align: left;
 }
 
@@ -142,24 +142,24 @@ svg {
 
 /*Button*/
 .card-button {
-  /* border: 1px solid #252525; */
-  display: flex;
+   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: .3em; */
+  width: 50%;
   cursor: pointer;
   border-radius: 6px;
   transition: .3s ease-in-out;
-  /* background-color: #23d100; */
-  /* border: 1px solid #1e85c9; */
   background-color: #22a800;
   color: #ffff;
-  /* padding: 3px; */
 }
 
 .btn{
   color: #f1f1f1;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
 }
 
 /*Hover*/
@@ -168,13 +168,10 @@ svg {
   box-shadow: rgba(73, 70, 58, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
 }
 
-.card-button:hover {
-  
+h2{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
 }
-
-
-
-
 
 .banner {
   display: flex;

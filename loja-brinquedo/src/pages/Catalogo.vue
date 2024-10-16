@@ -28,7 +28,8 @@
           <span class="text-title">R$ {{ brinquedo.preco.toFixed(2) }}</span>
           <div class="card-button">
             <router-link :to="`/detalhes/${brinquedo.id}`" class="link">
-             <button class="btn">Comprar</button>
+             <button class="btn"><img src="../assets/icons8-carrinho-24.png" alt="">
+              Comprar</button>
             </router-link>
           </div>
         </div>
@@ -99,7 +100,7 @@ export default defineComponent({
   margin-bottom: 20dvh;
 }
 
-..image {
+.image {
   height: 160px;
   width: 100%;
   border-radius: .5rem;
@@ -177,6 +178,7 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 50%;
   /* padding: .3em; */
   cursor: pointer;
   border-radius: 6px;
@@ -191,6 +193,14 @@ svg {
 .btn{
   color: #f1f1f1;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.card-button img{
+  width: 15px;
 }
 
 /*Hover*/
@@ -199,6 +209,10 @@ svg {
   box-shadow: rgba(73, 70, 58, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
 }
 
+h2{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
 
 p{
   text-align: left;

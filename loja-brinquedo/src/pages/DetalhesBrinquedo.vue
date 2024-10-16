@@ -6,7 +6,7 @@
       <h2>{{ brinquedo.nome }}</h2>
       
       
-      <p><strong>Quantidade:</strong> {{ brinquedo.quantidade }}</p>
+      <p>Quantidade: {{ brinquedo.quantidade }}</p>
       <p><strong>Preço:</strong> R$ {{ brinquedo.preco.toFixed(2) }}</p>
       <p><strong>Categoria:</strong> {{ brinquedo.categoria }}</p>
       <p><strong>Marca:</strong> {{ brinquedo.marca }}</p>
