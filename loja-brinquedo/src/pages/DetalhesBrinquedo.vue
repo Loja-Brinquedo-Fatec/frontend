@@ -2,16 +2,24 @@
   <div v-if="brinquedo" class="container">
     <img :src="brinquedo.imagem" :alt="brinquedo.nome" class="image" />
     <div class="info">
-      <p><strong>Cód:</strong> {{ brinquedo.id }}</p>
-      <h2>{{ brinquedo.nome }}</h2>
-      
-      
+      <div class="top">
+        <p><strong>Cód:</strong> {{ brinquedo.id }}</p>
       <p>Quantidade: {{ brinquedo.quantidade }}</p>
-      <p><strong>Preço:</strong> R$ {{ brinquedo.preco.toFixed(2) }}</p>
       <p><strong>Categoria:</strong> {{ brinquedo.categoria }}</p>
+      </div>
+      
+      <div class="principal">
       <p><strong>Marca:</strong> {{ brinquedo.marca }}</p>
-      <p><strong>Descrição:</strong> {{ brinquedo.descricao }}</p>
+      <h1>{{ brinquedo.nome }}</h1>
+      <h2><strong>Preço:</strong> R$ {{ brinquedo.preco.toFixed(2) }}</h2>
+      </div>
+
+      <div class="bottom">
+        <p><strong>Descrição:</strong> {{ brinquedo.descricao }}</p>
       <p><strong>Detalhes:</strong> {{ brinquedo.detalhes }}</p>
+      </div>
+
+      
     </div>
   </div>
   <p v-else>Brinquedo não encontrado.</p>
@@ -47,21 +55,33 @@ export default defineComponent({
 <style scoped>
 .container {
   display: flex;
-  padding: 20px;
   gap: 20px;
-  align-items: center;
-  justify-content: space-around;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 100%;
+  margin: auto;
+  background-color: #fafafa;
 }
 .image {
   width: 300px;
   height: 300px;
   object-fit: cover;
   background-color: aquamarine; 
-
+  flex: 1;
 }
 .info {
   flex: 1;
   text-align: left;
-  background-color: bisque;
+  margin: 10px;
+}
+.top{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.principal{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
