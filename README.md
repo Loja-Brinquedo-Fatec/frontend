@@ -5,6 +5,7 @@ Este projeto é uma aplicação Vue configurada com Vite para desenvolvimento r�
 ## Pré-requisitos
 
 - [Node.js](https://nodejs.org/) versão 14 ou superior
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/) para gerenciar pacotes
 
 ## Configuração do Projeto
 
@@ -18,7 +19,17 @@ Este projeto é uma aplicação Vue configurada com Vite para desenvolvimento r�
    npm install
    npm install sweetalert2
 
+   ou
+
+   yarn install
+   yarn add sweetalert2
+
    
 1. **Rodando o dependencias**:
    ```bash
    npm run dev
+
+   ou
+
+   yarn dev
+
