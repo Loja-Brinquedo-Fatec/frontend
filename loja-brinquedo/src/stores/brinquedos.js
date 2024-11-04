@@ -1,14 +1,23 @@
 import { defineStore } from 'pinia';
-import brinquedosData from '../data/brinquedos.json';
 
 export const useBrinquedosStore = defineStore('brinquedos', {
   state: () => ({
     brinquedos: [],
   }),
   actions: {
-    carregarBrinquedos() {
-      // Simulando uma chamada de API
-      this.brinquedos = brinquedosData;
+    async carregarBrinquedos() {
+      try {
+        const response = await fetch('https://607c-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/',{
+          method: 'GET'
+        });
+        if (!response.ok) {
+          throw new Error('Erro ao carregar os brinquedos',  console.log(response.text()));
+        }
+        const data = await response.json();
+        this.brinquedos = data; // Supondo que a resposta é um array de brinquedos
+      } catch (error) {
+        console.error('Erro na requisição:', error);
+      }
     },
     adicionarBrinquedo(novoBrinquedo) {
       const idMax = this.brinquedos.length > 0 ? Math.max(...this.brinquedos.map(b => b.id)) : 0;

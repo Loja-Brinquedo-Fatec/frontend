@@ -1,0 +1,55 @@
+{
+    "categorias": [
+      {
+        "id": 1,
+        "nome": "Dinossauros",
+        "descricao": "Brinquedos inspirados em dinossauros, como figuras, fósseis e brinquedos educativos sobre o período jurássico."
+      },
+      {
+        "id": 2,
+        "nome": "Blocos de Montar",
+        "descricao": "Blocos de montar que incentivam a criatividade e habilidades motoras das crianças."
+      },
+      {
+        "id": 3,
+        "nome": "Bonecas e Acessórios",
+        "descricao": "Bonecas de diversos tipos e acessórios variados para brincadeiras de faz-de-conta."
+      },
+      {
+        "id": 4,
+        "nome": "Carrinhos e Veículos",
+        "descricao": "Inclui carrinhos, caminhões, aviões e outros veículos de brinquedo."
+      },
+      {
+        "id": 5,
+        "nome": "Jogos de Tabuleiro",
+        "descricao": "Jogos para jogar em família ou com amigos, desenvolvendo habilidades sociais e raciocínio lógico."
+      },
+      {
+        "id": 6,
+        "nome": "Quebra-cabeças",
+        "descricao": "Quebra-cabeças de diversos tamanhos e níveis de dificuldade para desenvolver habilidades cognitivas."
+      },
+      {
+        "id": 7,
+        "nome": "Brinquedos Educativos",
+        "descricao": "Brinquedos que estimulam o aprendizado de habilidades básicas, como leitura, matemática e ciências."
+      },
+      {
+        "id": 8,
+        "nome": "Fantoches e Marionetes",
+        "descricao": "Fantoches e marionetes para estimular a imaginação e criatividade em brincadeiras de teatro."
+      },
+      {
+        "id": 9,
+        "nome": "Instrumentos Musicais",
+        "descricao": "Instrumentos musicais de brinquedo para incentivar o interesse pela música."
+      },
+      {
+        "id": 10,
+        "nome": "Esportes e Atividades ao Ar Livre",
+        "descricao": "Brinquedos para atividades ao ar livre, como bolas, pipas, frisbees e bicicletas."
+      }
+    ]
+  }
+  

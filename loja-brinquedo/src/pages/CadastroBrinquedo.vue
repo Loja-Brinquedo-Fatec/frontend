@@ -1,66 +1,18 @@
 <template>
   <div class="container">
     <h2>Cadastrar Novo Brinquedo</h2>
-  
+
     <form @submit.prevent="handleSubmit" class="form">
-      <input
-        type="text"
-        name="nome"
-        v-model="form.nome"
-        placeholder="Nome"
-        required
-      />
-      <textarea
-        name="descricao"
-        v-model="form.descricao"
-        placeholder="Descrição"
-        required
-      ></textarea>
-      <input
-        type="text"
-        name="categoria"
-        v-model="form.categoria"
-        placeholder="Categoria"
-        required
-      />
-      <input
-        type="text"
-        name="marca"
-        v-model="form.marca"
-        placeholder="Marca"
-        required
-      />
-      <!-- Alteração: campo de upload de arquivo -->
-      <input
-        type="file"
-        name="imagem"
-        @change="handleImageChange"
-        accept="image/*"
-        required
-      />
+      <input type="text" name="nome" v-model="form.nome" placeholder="Nome" required />
+      <input name="descricao" v-model="form.descricao" placeholder="Descrição" required />
+      <input type="text" name="categoria" v-model="form.categoria" placeholder="Categoria" required />
+      <input type="text" name="marca" v-model="form.marca" placeholder="Marca" required />
+      <input type="file" name="imagem" @change="handleImageChange" accept="image/*" required />
       <label for="">Preço</label>
-      <input
-        type="number"
-        step="0.01"
-        name="preco"
-        v-model.number="form.preco"
-        placeholder="Preço"
-        required
-      />
+      <input type="number" step="0.01" name="preco" v-model.number="form.preco" placeholder="Preço" required />
       <label for="">Quantidade</label>
-      <input
-        type="number"
-        name="quantidade"
-        v-model.number="form.quantidade"
-        placeholder="Quantidade"
-        required
-      />
-      <textarea
-        name="detalhes"
-        v-model="form.detalhes"
-        placeholder="Detalhes"
-        required
-      ></textarea>
+      <input type="number" name="quantidade" v-model.number="form.quantidade" placeholder="Quantidade" required />
+      <input name="detalhes" v-model="form.detalhes" placeholder="Detalhes" required />
       <button type="submit" class="btn btn-success">Salvar</button>
     </form>
   </div>
@@ -68,60 +20,84 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import { useBrinquedosStore, Brinquedo } from '../stores/brinquedos';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   name: 'CadastroBrinquedo',
   setup() {
-    const brinquedosStore = useBrinquedosStore();
     const router = useRouter();
-    
-    // Estado reativo para armazenar os dados do formulário, incluindo a imagem
-    const form = reactive<Omit<Brinquedo, 'id'>>({
+    const form = reactive({
       nome: '',
+      preco: 0,
       descricao: '',
       categoria: '',
       marca: '',
-      imagem: '', // Isso agora armazenará o nome ou URL da imagem
-      preco: 0,
-      detalhes: '',
       quantidade: 0,
+      detalhes: '',
+      imagem: null,
     });
 
-    let imagemSelecionada: File | null = null; // Variável para armazenar o arquivo selecionado
-
-    // Manipulador de mudança de arquivo (para capturar a imagem selecionada)
     const handleImageChange = (event: Event) => {
-      const input = event.target as HTMLInputElement;
-      if (input.files && input.files.length > 0) {
-        imagemSelecionada = input.files[0]; // Armazena o arquivo selecionado
-        form.imagem = URL.createObjectURL(imagemSelecionada); // Opcional: exibe a imagem localmente
+      const fileInput = event.target as HTMLInputElement;
+      if (fileInput.files && fileInput.files.length > 0) {
+        form.imagem = fileInput.files[0];
       }
     };
 
-    const handleSubmit = () => {
-      if (form.nome && form.preco && form.quantidade && imagemSelecionada) {
-        // Aqui você pode enviar a imagem selecionada junto com os outros dados
+    const handleSubmit = async () => {
+      if (form.nome && form.preco && form.quantidade && form.categoria) {
         const formData = new FormData();
+        formData.append('imagem', form.imagem);
         formData.append('nome', form.nome);
+        formData.append('preco', form.preco.toString());
         formData.append('descricao', form.descricao);
         formData.append('categoria', form.categoria);
         formData.append('marca', form.marca);
-        formData.append('imagem', imagemSelecionada); // Adiciona o arquivo de imagem
-        formData.append('preco', form.preco.toString());
         formData.append('quantidade', form.quantidade.toString());
         formData.append('detalhes', form.detalhes);
 
-        brinquedosStore.adicionarBrinquedo({ ...form }); // Simula a adição de brinquedo
-        alert('Brinquedo cadastrado com sucesso!');
-        router.push('/admin');
+        try {
+          const response = await fetch('https://e007-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/register', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (response.ok) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Cadastrado',
+              text: 'Brinquedo cadastrado com sucesso!',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            router.push('/admin');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Erro ao Cadastrar',
+              text: 'Falha ao cadastrar o brinquedo. Tente novamente.',
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Ocorreu um erro ao conectar ao servidor.',
+          });
+        }
       } else {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao Cadastrar',
+          text: 'Insira todos os dados corretamente.',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     };
 
-    return { form, handleImageChange, handleSubmit };
+    return { form, handleSubmit, handleImageChange };
   },
 });
 </script>
@@ -130,6 +106,7 @@ export default defineComponent({
 .container {
   padding: 20px;
 }
+
 .form {
   max-width: 600px;
   margin: 0 auto;
@@ -138,6 +115,7 @@ export default defineComponent({
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 input,
 textarea {
   width: 100%;
@@ -150,19 +128,6 @@ textarea {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Cor do texto do placeholder */
-input::placeholder,
-textarea::placeholder {
-  color: #888;
-  font-style: italic;
-}
-
-.label{
-  width: 100%;
-  text-align: left;
-}
-
-/* Estilo de foco (quando o input é clicado) */
 input:focus,
 textarea:focus {
   outline: none;
@@ -170,30 +135,6 @@ textarea:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
-/* Estilo do botão de upload de arquivo */
-input[type="file"] {
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  font-size: 16px;
-}
-
-/* Estilo especial para o botão de upload (estilizado para parecer um botão) */
-input[type="file"]::file-selector-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-input[type="file"]::file-selector-button:hover {
-  background-color: #0056b3;
-}
-
-/* Estilo para o botão submit */
 button {
   display: block;
   width: 100%;
