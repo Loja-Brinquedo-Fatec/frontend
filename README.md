@@ -10,5 +10,15 @@ Este projeto é uma aplicação Vue configurada com Vite para desenvolvimento r�
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
+   git clone https://github.com/Loja-Brinquedo-Fatec/frontend
+   cd loja-brinquedo
+   
+1. **Intalando o dependencias**:
+   ```bash
+   npm install
+   npm install sweetalert2
+
+   
+1. **Rodando o dependencias**:
+   ```bash
+   npm run dev
