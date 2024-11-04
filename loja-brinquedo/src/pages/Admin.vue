@@ -43,12 +43,29 @@ export default defineComponent({
       router.push(`/admin/editar/${id}`);
     };
 
-    const excluirBrinquedo = (id: number): void => {
-      if (confirm('Tem certeza que deseja excluir este brinquedo?')) {
-        brinquedosStore.excluirBrinquedo(id);
-        alert('Brinquedo excluído!');
+    const excluirBrinquedo = async (id: number): Promise<void> => {
+  if (confirm('Tem certeza que deseja excluir este brinquedo?')) {
+    try {
+      const response = await fetch(`https://76ac-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao excluir o brinquedo: ${await response.text()}`);
       }
-    };
+
+      // Remove o brinquedo da loja Pinia
+      brinquedosStore.excluirBrinquedo(id);
+      alert('Brinquedo excluído com sucesso!');
+    } catch (error) {
+      console.error('Erro na exclusão do brinquedo:', error);
+      alert('Ocorreu um erro ao excluir o brinquedo.');
+    }
+  }
+};
 
     return {
       brinquedos: brinquedosStore.brinquedos,

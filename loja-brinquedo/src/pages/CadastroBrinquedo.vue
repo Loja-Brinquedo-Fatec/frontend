@@ -58,7 +58,7 @@ export default defineComponent({
         formData.append('detalhes', form.detalhes);
 
         try {
-          const response = await fetch('https://e007-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/register', {
+          const response = await fetch('https://76ac-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/register', {
             method: 'POST',
             body: formData,
           });

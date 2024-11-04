@@ -110,38 +110,53 @@ export default defineComponent({
     };
 
     // Atualiza o produto
-    const updateProduct = () => {
-      // Se uma nova imagem foi selecionada, ela é tratada aqui
-      if (imagemSelecionada) {
-        // Aqui você pode adicionar a lógica para enviar a imagem para o servidor se necessário
-        // Exemplo: adicionar ao FormData para ser enviado via API
-        const formData = new FormData();
-        formData.append('imagem', imagemSelecionada);
-        // Adiciona os outros campos ao formData
-        formData.append('nome', product.value.nome);
-        formData.append('preco', product.value.preco.toString());
-        formData.append('descricao', product.value.descricao);
-        formData.append('categoria', product.value.categoria);
-        formData.append('marca', product.value.marca);
-        formData.append('quantidade', product.value.quantidade.toString());
-        formData.append('detalhes', product.value.detalhes);
-        // Aqui você pode enviar formData para um servidor, se houver uma API
-      }
+    // Atualiza o produto
+const updateProduct = async () => {
+  // Se uma nova imagem foi selecionada, ela é tratada aqui
+  const formData = new FormData();
+  if (imagemSelecionada) {
+    // Adiciona a nova imagem ao FormData
+    formData.append('imagem', imagemSelecionada);
+  }
 
-      // Atualiza o produto na store Pinia
-      store.editarBrinquedo(product.value.id, {
-        nome: product.value.nome,
-        preco: product.value.preco,
-        descricao: product.value.descricao,
-        categoria: product.value.categoria,
-        marca: product.value.marca,
-        imagem: product.value.imagem, // Usa o novo URL da imagem se alterado
-        quantidade: product.value.quantidade,
-        detalhes: product.value.detalhes,
-      });
+  // Adiciona os outros campos ao formData
+  formData.append('nome', product.value.nome);
+  formData.append('preco', product.value.preco.toString());
+  formData.append('descricao', product.value.descricao);
+  formData.append('categoria', product.value.categoria);
+  formData.append('marca', product.value.marca);
+  formData.append('quantidade', product.value.quantidade.toString());
+  formData.append('detalhes', product.value.detalhes);
 
-      router.push({ name: 'Catalogo' }); // Redireciona após a atualização
-    };
+  try {
+    // Aqui você pode enviar formData para um servidor
+    const response = await fetch(`https://76ac-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/edit/${product.value.id}`, {
+      method: 'PUT', // Usando PUT para atualização
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro ao atualizar o produto: ${await response.text()}`);
+    }
+
+    // Atualiza o produto na store Pinia
+    store.editarBrinquedo(product.value.id, {
+      nome: product.value.nome,
+      preco: product.value.preco,
+      descricao: product.value.descricao,
+      categoria: product.value.categoria,
+      marca: product.value.marca,
+      imagem: product.value.imagem, // Usa o novo URL da imagem se alterado
+      quantidade: product.value.quantidade,
+      detalhes: product.value.detalhes,
+    });
+
+    router.push({ name: 'Catalogo' }); // Redireciona após a atualização
+  } catch (error) {
+    console.error('Erro na atualização do produto:', error);
+  }
+};
+
 
     return {
       product,

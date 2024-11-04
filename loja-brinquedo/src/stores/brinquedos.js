@@ -7,12 +7,18 @@ export const useBrinquedosStore = defineStore('brinquedos', {
   actions: {
     async carregarBrinquedos() {
       try {
-        const response = await fetch('https://607c-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/',{
-          method: 'GET'
+        const response = await fetch('https://76ac-2804-7f0-a218-1c58-580d-3852-e55b-d5da.ngrok-free.app/product/', {
+          method: 'GET',
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
         });
+        
         if (!response.ok) {
-          throw new Error('Erro ao carregar os brinquedos',  console.log(response.text()));
+          const errorMessage = await response.text(); // Obtenha a mensagem de erro
+          throw new Error(`Erro ao carregar os brinquedos: ${errorMessage}`);
         }
+        
         const data = await response.json();
         this.brinquedos = data; // Supondo que a resposta é um array de brinquedos
       } catch (error) {
